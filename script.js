@@ -1,11 +1,11 @@
 document.getElementById("btn").addEventListener("click",async function(){
-	const text = document.ElementById("text").value;
+	const text = document.getElementById("text").value;
 	const delay = parseInt(document.getElementById("delay").value,10);
 	const output = document.getElementById("output");
 
 	output.textContent ="";
 
-	if(!text || isNaN(delay) || delay <0){
+	if(!text || isNaN(delay) || delay < 0){
 		output.textContent = "Please enter valid text and a positive delay.";
 		return;
 		
