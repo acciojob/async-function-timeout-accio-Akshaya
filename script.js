@@ -1,17 +1,24 @@
 //your JS code here. If required.
 const btn = document.getElementById("btn");
+const textInput = document.getElementById("text");
+const delayInput = document.getElementById("delay")
 const output = document.getElementById("output");
 
-function wait(ms){
-	return new Promise(resolve=>setTimeout(resolve,ms));
+async function showMessage(){
+	const message = textInput.value;
+	const delay = Number(textInput.value);
+
+	await new Promise(resolve=>queueMicrotask(resolve));
+
+	await new Promise(resolve=>{
+		const end = performance.now()+delay;
+
+		function check(){
+			if(performance.now()=>end) resolve();
+			else requestAnimationFrame(check);
+		}
+		requestAnimationFrame(check);
+	})
+	output.textContent = message;
 }
-
-bt.addEventListener("click",async()=>{
-	const text = document.getElementById("text").value;
-	const delay = Number(document.getElementById("delay").value);
-
-	output.textContent = "";
-	await wait(delay);
-
-	output.textContent = text;
-});
+btn.addEventListener("click",showMessage);
